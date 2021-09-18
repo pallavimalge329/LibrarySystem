@@ -106,18 +106,17 @@ namespace LibraryFunctions
 
         //Inserting Data into Library Register
 
-        public static void InsertData(string BookId, string MemberId, DateTime StartDate, DateTime ReturnedDate)
+        public static void InsertData(string BookId, string MemberId)
         {
             con.Open();
 
-            string query = "insert into LibraryRegister values(@bi,@mi,@sd,@rd)";
+            string query = "insert into LibraryRegister (BookId, MemberId) values(@bi,@mi)";
 
             cmd = new SqlCommand(query, con);
 
             cmd.Parameters.Add(new SqlParameter("bi", BookId));
             cmd.Parameters.Add(new SqlParameter("mi", MemberId));
-            cmd.Parameters.Add(new SqlParameter("sd", StartDate));
-            cmd.Parameters.Add(new SqlParameter("rd", ReturnedDate));
+            
 
             int r = cmd.ExecuteNonQuery();
             Console.WriteLine("{0} of rows affected", r);
@@ -132,10 +131,10 @@ namespace LibraryFunctions
             string query = "Select * from LibraryRegister";
             cmd = new SqlCommand(query, con);
             dr = cmd.ExecuteReader();
-            Console.WriteLine("BookId | MemberId | StartDate | ReturnDate");
+            Console.WriteLine("BookId | MemberId | IssueDate | DueDate");
             while (dr.Read())
             {
-                Console.WriteLine("{0} | {1} | {2} | {3} ", dr["BookId"], dr["MemberId"], dr["StartDate"], dr["ReturnedDate"]);
+                Console.WriteLine("{0} | {1} | {2} | {3} ", dr["BookId"], dr["MemberId"], dr["StartDate"], dr["DueDate"]);
 
             }
             dr.Close();
@@ -160,7 +159,7 @@ namespace LibraryFunctions
 
         }
 
-        public static void DisplayUpdatedData()
+        public static void DisplayBookUpdatedData()
         {
             con.Open();
             string query = "Select * from Book";
@@ -180,7 +179,7 @@ namespace LibraryFunctions
         public static void UpdateMemberData(string MemberId, string MemberName, string MbContact)
         {
             con.Open();
-            SqlCommand updateCommand = new SqlCommand("Update Book set MemberName=@mn, MbContact=@c0 where MemberId=@mi", con);
+            SqlCommand updateCommand = new SqlCommand("Update Member set MemberName=@mn, MbContact=@co where MemberId=@mi", con);
             updateCommand.Parameters.Add(new SqlParameter("mi", MemberId));
             updateCommand.Parameters.Add(new SqlParameter("mn", MemberName));
             updateCommand.Parameters.Add(new SqlParameter("co", MbContact));
@@ -209,7 +208,7 @@ namespace LibraryFunctions
         }
 
         //Deleting Data From Member Table
-        public static void DeleteMemberData(string MemberId, string MemberName, string MbContact)
+        public static void DeleteMemberData(string MemberId)
         {
             con.Open();
             SqlCommand deleteCommand = new SqlCommand("Delete from Member where MemberId=@mi", con);
@@ -217,7 +216,7 @@ namespace LibraryFunctions
             Console.WriteLine("Commands executed! Total rows affected are " + deleteCommand.ExecuteNonQuery());
             Console.WriteLine("***Done! Press enter to move to the next step***");
             Console.ReadLine();
-            Console.Clear();
+            //Console.Clear();
             con.Close();
         }
 
@@ -239,10 +238,10 @@ namespace LibraryFunctions
 
         //Deleting Data From BookTable
 
-        public static void DeleteBookData(string BookId, string BookTitle, int Price, string Author, string Catogory)
+        public static void DeleteBookData(string BookId)
         {
             con.Open();
-            SqlCommand deleteCommand = new SqlCommand("Delete from Member where BookId=@bi", con);
+            SqlCommand deleteCommand = new SqlCommand("Delete from Book where BookId=@bi", con);
             deleteCommand.Parameters.Add(new SqlParameter("bi", BookId));
             Console.WriteLine("Commands executed! Total rows affected are " + deleteCommand.ExecuteNonQuery());
             Console.WriteLine("***Done! Press enter to move to the next step***");
@@ -265,8 +264,103 @@ namespace LibraryFunctions
             }
             dr.Close();
 
+            con.Close();
+        }
+
+
+        //Searching Data From BookTable
+
+        public static void SelectBookTitleData(string BookTitle)
+        {
+            con.Open();
+            SqlCommand selectCommand = new SqlCommand("Select * from Book where BookTitle=@bt", con);
+            selectCommand.Parameters.Add(new SqlParameter("bt", BookTitle));
+            Console.WriteLine("Commands executed! Total rows affected are " + selectCommand.ExecuteNonQuery());
+            Console.WriteLine("***Done! Press enter to move to the next step***");
+            Console.ReadLine();
+            Console.Clear();
+            con.Close();
+        }
+        
+        public static void DisplayselectedBookTitleData()
+        {
+            con.Open();
+            string query = "Select * from Book";
+            cmd = new SqlCommand(query, con);
+            dr = cmd.ExecuteReader();
+            Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
+            while (dr.Read())
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr["BookId"], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
+
+            }
+            dr.Close();
+            con.Close();
+        }
+
+            public static void SelectBookAuthorData(string Author)
+            {
+                con.Open();
+                SqlCommand selectCommand = new SqlCommand("Select * from Book where Author=@ath", con);
+                selectCommand.Parameters.Add(new SqlParameter("ath", Author));
+                Console.WriteLine("Commands executed! Total rows affected are " + selectCommand.ExecuteNonQuery());
+                Console.WriteLine("***Done! Press enter to move to the next step***");
+                Console.ReadLine();
+           
+                Console.Clear();
+                con.Close();
+            }
+
+            public static void DisplayselectedBookAuthorData()
+            {
+                con.Open();
+                string query = "Select * from Book";
+                cmd = new SqlCommand(query, con);
+                dr = cmd.ExecuteReader();
+                Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
+                while (dr.Read())
+                {
+                    Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr["BookId"], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
+
+                }
+                dr.Close();
+            con.Close();
+
+
+            }
+
+             public static void SelectBookCategoryData(string Catogory)
+        {
+            con.Open();
+            SqlCommand selectCommand = new SqlCommand("Select * from Book where Catogory=@ct", con);
+            selectCommand.Parameters.Add(new SqlParameter("ct", Catogory));
+            Console.WriteLine("Commands executed! Total rows affected are " + selectCommand.ExecuteNonQuery());
+            Console.WriteLine("***Done! Press enter to move to the next step***");
+            Console.ReadLine();
+            Console.Clear();
+            con.Close();
+        }
+
+        public static void DisplayselectedBookCategoryData()
+        {
+            con.Open();
+            string query = "Select * from Book";
+            cmd = new SqlCommand(query, con);
+            dr = cmd.ExecuteReader();
+            Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
+            while (dr.Read())
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr["BookId"], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
+
+            }
+            dr.Close();
+            con.Close();
+
 
         }
 
+        }
+
+
     }
-}
+
