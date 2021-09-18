@@ -33,7 +33,7 @@ namespace LibrarySystem
 
             string MemberId;
             string MemberName;
-            string MbContact;
+            long MbContact;
             string BookId;
             string BookTitle;
             int Price;
@@ -69,11 +69,12 @@ namespace LibrarySystem
                                 Console.WriteLine("enter the name again");
                                 MemberName = Console.ReadLine();
                             }
-                        
+
+                            
                             while (true)
                             {
-                                Console.WriteLine("Enter Member's Contact No");
-                                MbContact = Console.ReadLine();
+                                Console.WriteLine("Enter Contact No");
+                                MbContact = Convert.ToInt64(Console.ReadLine());
                                 bool check = isValidMobileNumber(MbContact);
 
 
