@@ -113,55 +113,79 @@ namespace LibrarySystem
                     break;
                 case 2:
 
-                    //Update Opration for Member Details
-                    Console.WriteLine("*** Enter Values For Update Member Details***");
-                    Console.WriteLine("Enter MemberId for Refernece");
-                    MemberId = Console.ReadLine();
-                    Console.WriteLine("Enter MemberName to Update");
-                    MemberName = Console.ReadLine();
-                    Console.WriteLine("Enter Member's Contact No to Update");
-                    MbContact = Console.ReadLine();
+                        //Update Opration for Member Details
 
-                    Connection.UpdateMemberData(MemberId, MemberName, MbContact);
-                    Connection.DisplayUpdatedMemberData();
+                    Console.WriteLine("1.update for Member");
+                    Console.WriteLine("2.update for Book");
+                    Console.Write("Enter Choice(1-2):");
+                    int choice1 = Convert.ToInt32(Console.ReadLine());
 
-                    //Update Opration for Book Details
-                    Console.WriteLine("*** Enter Values For Update Book***");
-                    Console.WriteLine("Enter BookId for Refernece");
-                    BookId = Console.ReadLine();
-                    Console.WriteLine("Enter Auther Name to Upate");
-                    Author = Console.ReadLine();
-                    Console.WriteLine("Enter Book Price to Upate");
-                    Price = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Enter Book Category to Upate");
-                    Catogory = Console.ReadLine();
+                        if (choice1 == 1)
+                        {
+                            Console.WriteLine("*** Enter Values For Update Member Details***");
+                            Console.WriteLine("Enter MemberId for Refernece");
+                            MemberId = Console.ReadLine();
+                            Console.WriteLine("Enter MemberName to Update");
+                            MemberName = Console.ReadLine();
+                            Console.WriteLine("Enter Member's Contact No to Update");
+                            MbContact = Console.ReadLine();
 
-                    Connection.UpdateBookData(BookId, Price, Author, Catogory);
-                    Connection.DisplayBookUpdatedData();
+                            Connection.UpdateMemberData(MemberId, MemberName, MbContact);
+                            Connection.DisplayUpdatedMemberData();
+                        }
+                        else if (choice1 == 2)
+                        {
+                            //Update Opration for Book Details
+                            Console.WriteLine("*** Enter Values For Update Book***");
+                            Console.WriteLine("Enter BookId for Refernece");
+                            BookId = Console.ReadLine();
+                            Console.WriteLine("Enter Auther Name to Upate");
+                            Author = Console.ReadLine();
+                            Console.WriteLine("Enter Book Price to Upate");
+                            Price = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter Book Category to Upate");
+                            Catogory = Console.ReadLine();
 
+                            Connection.UpdateBookData(BookId, Price, Author, Catogory);
+                            Connection.DisplayBookUpdatedData();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Choice");
+                        }
                     break;
                 case 3:
-                    //Delete Opration for Book Details
-                    Console.WriteLine("*** Enter Values For Delete Data From Book***");
-                    Console.WriteLine("Enter BookId for Refernece");
-                    BookId = Console.ReadLine();
 
+                    Console.WriteLine("1.update for Member");
+                    Console.WriteLine("2.update for Book");
+                    Console.Write("Enter Choice(1-2):");
+                    int choice2 = Convert.ToInt32(Console.ReadLine());
+                        if (choice2 == 1)
+                  {
+                            //Delete Opration for Book Details
+                            Console.WriteLine("*** Enter Values For Delete Data From Book***");
+                            Console.WriteLine("Enter BookId for Refernece");
+                            BookId = Console.ReadLine();
+                            Connection.DeleteBookData(BookId);
+                            Connection.DisplayDeletdBookData();
 
-                    Connection.DeleteBookData(BookId);
-                    Connection.DisplayDeletdBookData();
+                  }
+                        else if(choice2==2)
 
-
-
-
-                    //Delete OPeration For Member Details
-
+                        //Delete OPeration For Member Details
+                 { 
                     Console.WriteLine("*** Enter Values For Delete Member Details***");
                     Console.WriteLine("Enter MemberId for Refernece");
                     MemberId = Console.ReadLine();
 
                     Connection.DeleteMemberData(MemberId);
                     Connection.DisplayDeletedMemberData();
-                    break;
+                  }
+                        else
+                        {
+                            Console.WriteLine("Invalid Choice");
+                        }
+                        break;
 
                 //Searching Operation On Book Data 
                 case 4:
@@ -200,7 +224,7 @@ namespace LibrarySystem
                             Connection.SelectBookCategoryData(Catogory);
                             Connection.DisplayselectedBookCategoryData();
                             break;
-                    }
+               }
 
                     break;
 
@@ -209,13 +233,15 @@ namespace LibrarySystem
                         Console.ReadLine();
                         Environment.Exit(0);
                             break;
-            }
+         }
 
             Console.WriteLine("Do You Wish to continue:");
             reply = Convert.ToChar(Console.ReadLine());
-        } while(reply=='Y');
 
-        
+            } while (reply == 'Y');
+
+
+
 
             Console.ReadKey();
 
