@@ -1,10 +1,5 @@
 ﻿using System;
-using LibraryModel;
 using LibraryFunctions;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 namespace LibrarySystem
@@ -33,7 +28,7 @@ namespace LibrarySystem
 
             string MemberId;
             string MemberName;
-            long MbContact;
+            string MbContact;
             string BookId;
             string BookTitle;
             int Price;
@@ -41,6 +36,7 @@ namespace LibrarySystem
             string Catogory;
             DateTime StartDate;
             DateTime ReturnedDate;
+            DateTime DueDate;
 
             // Switch Case For CRUD Operations
             switch (ch)
@@ -74,7 +70,7 @@ namespace LibrarySystem
                             while (true)
                             {
                                 Console.WriteLine("Enter Contact No");
-                                MbContact = Convert.ToInt64(Console.ReadLine());
+                                MbContact = Console.ReadLine();
                                 bool check = isValidMobileNumber(MbContact);
 
 
@@ -90,25 +86,7 @@ namespace LibrarySystem
 
                             }
 
-                            public bool isValidMobileNumber(long inputMobileNumber)
-                            {
-                                string strRegex = @"(^[0-9]{10}$)|(^\+[0-9]{2}\s+[0-9] {2}[0-9]{8}$)|(^[0-9]{3}-[0-9]{4}-[0-9]{4}$)";
-
-
-                                Regex re = new Regex(strRegex);
-
-
-                                if (re.IsMatch(Convert.ToString(inputMobileNumber)))
-                                {
-                                    return (true);
-                                }
-
-                                else
-                                {
-                                    return (false);
-                                }
-
-                            }
+                           
 
 
 
@@ -303,6 +281,25 @@ namespace LibrarySystem
 
 
             Console.ReadKey();
+
+        }
+        public static bool isValidMobileNumber(string inputMobileNumber)
+        {
+            string strRegex = @"(^[0-9]{10}$)|(^\+[0-9]{2}\s+[0-9] {2}[0-9]{8}$)|(^[0-9]{3}-[0-9]{4}-[0-9]{4}$)";
+
+
+            Regex re = new Regex(strRegex);
+
+
+            if (re.IsMatch(inputMobileNumber))
+            {
+                return (true);
+            }
+
+            else
+            {
+                return (false);
+            }
 
         }
     }

@@ -277,12 +277,12 @@ namespace LibraryFunctions
             selectCommand.Parameters.Add(new SqlParameter("bt", data));
             selectCommand.Parameters.Add(new SqlParameter("ct", data));
             selectCommand.Parameters.Add(new SqlParameter("ath", data));
-            cmd = new SqlCommand(query, con);
-            dr = cmd.ExecuteReader();
+           // cmd = new SqlCommand(query, con);
+            dr = selectCommand.ExecuteReader();
             Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
             while (dr.Read())
             {
-                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr["BookId"], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr[0], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
 
             }
             dr.Close();
