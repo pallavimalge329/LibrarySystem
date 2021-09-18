@@ -116,7 +116,7 @@ namespace LibraryFunctions
 
             cmd.Parameters.Add(new SqlParameter("bi", BookId));
             cmd.Parameters.Add(new SqlParameter("mi", MemberId));
-            
+
 
             int r = cmd.ExecuteNonQuery();
             Console.WriteLine("{0} of rows affected", r);
@@ -270,94 +270,37 @@ namespace LibraryFunctions
 
         //Searching Data From BookTable
 
-        public static void SelectBookTitleData(string BookTitle)
+        public static void SelectAsTitleCatAuthor(string data)
         {
             con.Open();
-            SqlCommand selectCommand = new SqlCommand("Select * from Book where BookTitle=@bt", con);
-            selectCommand.Parameters.Add(new SqlParameter("bt", BookTitle));
-            Console.WriteLine("Commands executed! Total rows affected are " + selectCommand.ExecuteNonQuery());
+            SqlCommand selectCommand = new SqlCommand("Select * from Book where BookTitle=@bt or Catogory=@ct or Author=@ath", con);
+            selectCommand.Parameters.Add(new SqlParameter("bt", data));
+            selectCommand.Parameters.Add(new SqlParameter("ct", data));
+            selectCommand.Parameters.Add(new SqlParameter("ath", data));
+            cmd = new SqlCommand(query, con);
+            dr = cmd.ExecuteReader();
+            Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
+            while (dr.Read())
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr["BookId"], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
+
+            }
+            dr.Close();
             Console.WriteLine("***Done! Press enter to move to the next step***");
             Console.ReadLine();
             Console.Clear();
             con.Close();
         }
+
         
-        public static void DisplayselectedBookTitleData()
-        {
-            con.Open();
-            string query = "Select * from Book";
-            cmd = new SqlCommand(query, con);
-            dr = cmd.ExecuteReader();
-            Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
-            while (dr.Read())
-            {
-                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr["BookId"], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
 
-            }
-            dr.Close();
-            con.Close();
-        }
+        
+        // executenonquery  -- insert , update, delete
+        // dr= executereadder -- select
+        // while(dr.Read(){
+       //}
 
-            public static void SelectBookAuthorData(string Author)
-            {
-                con.Open();
-                SqlCommand selectCommand = new SqlCommand("Select * from Book where Author=@ath", con);
-                selectCommand.Parameters.Add(new SqlParameter("ath", Author));
-                Console.WriteLine("Commands executed! Total rows affected are " + selectCommand.ExecuteNonQuery());
-                Console.WriteLine("***Done! Press enter to move to the next step***");
-                Console.ReadLine();
-           
-                Console.Clear();
-                con.Close();
-            }
-
-            public static void DisplayselectedBookAuthorData()
-            {
-                con.Open();
-                string query = "Select * from Book";
-                cmd = new SqlCommand(query, con);
-                dr = cmd.ExecuteReader();
-                Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
-                while (dr.Read())
-                {
-                    Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr["BookId"], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
-
-                }
-                dr.Close();
-            con.Close();
-
-
-            }
-
-             public static void SelectBookCategoryData(string Catogory)
-        {
-            con.Open();
-            SqlCommand selectCommand = new SqlCommand("Select * from Book where Catogory=@ct", con);
-            selectCommand.Parameters.Add(new SqlParameter("ct", Catogory));
-            Console.WriteLine("Commands executed! Total rows affected are " + selectCommand.ExecuteNonQuery());
-            Console.WriteLine("***Done! Press enter to move to the next step***");
-            Console.ReadLine();
-            Console.Clear();
-            con.Close();
-        }
-
-        public static void DisplayselectedBookCategoryData()
-        {
-            con.Open();
-            string query = "Select * from Book";
-            cmd = new SqlCommand(query, con);
-            dr = cmd.ExecuteReader();
-            Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
-            while (dr.Read())
-            {
-                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr["BookId"], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
-
-            }
-            dr.Close();
-            con.Close();
-
-
-        }
+        
 
         }
 

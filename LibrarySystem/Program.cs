@@ -161,7 +161,7 @@ namespace LibrarySystem
                     Console.Write("Enter Choice(1-2):");
                     int choice2 = Convert.ToInt32(Console.ReadLine());
                         if (choice2 == 1)
-                  {
+                        {
                             //Delete Opration for Book Details
                             Console.WriteLine("*** Enter Values For Delete Data From Book***");
                             Console.WriteLine("Enter BookId for Refernece");
@@ -169,18 +169,18 @@ namespace LibrarySystem
                             Connection.DeleteBookData(BookId);
                             Connection.DisplayDeletdBookData();
 
-                  }
+                         }
                         else if(choice2==2)
 
                         //Delete OPeration For Member Details
-                 { 
-                    Console.WriteLine("*** Enter Values For Delete Member Details***");
-                    Console.WriteLine("Enter MemberId for Refernece");
-                    MemberId = Console.ReadLine();
+                        { 
+                            Console.WriteLine("*** Enter Values For Delete Member Details***");
+                            Console.WriteLine("Enter MemberId for Refernece");
+                            MemberId = Console.ReadLine();
 
-                    Connection.DeleteMemberData(MemberId);
-                    Connection.DisplayDeletedMemberData();
-                  }
+                            Connection.DeleteMemberData(MemberId);
+                            Connection.DisplayDeletedMemberData();
+                        }
                         else
                         {
                             Console.WriteLine("Invalid Choice");
@@ -202,18 +202,18 @@ namespace LibrarySystem
                     {
                         case 1:
                             Console.WriteLine("***Enter BookTitle For Searching Data***");
-                            Console.WriteLine("Enter BookName");
+                            Console.WriteLine("Enter Book Title");
                             BookTitle = Console.ReadLine();
-                            Connection.SelectBookTitleData(BookTitle);
-                            Connection.DisplayselectedBookTitleData();
+                            Connection.SelectAsTitleCatAuthor(BookTitle);
+                           
                             break;
 
                         case 2:
                             Console.WriteLine("***Enter Author For Searching Data***");
                             Console.WriteLine("Enter AuthorName");
                             Author = Console.ReadLine();
-                            Connection.SelectBookAuthorData(Author);
-                           Connection.DisplayselectedBookAuthorData();
+                            Connection.SelectAsTitleCatAuthor(Author);
+                          
 
                             break;
 
@@ -221,8 +221,8 @@ namespace LibrarySystem
                             Console.WriteLine("***Enter Category For Searching Data***");
                             Console.WriteLine("Enter Category Name");
                             Catogory = Console.ReadLine();
-                            Connection.SelectBookCategoryData(Catogory);
-                            Connection.DisplayselectedBookCategoryData();
+                            Connection.SelectAsTitleCatAuthor(Catogory);
+                           
                             break;
                }
 
