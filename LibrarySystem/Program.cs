@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace LibrarySystem
 {
@@ -41,7 +42,7 @@ namespace LibrarySystem
             DateTime StartDate;
             DateTime ReturnedDate;
 
-            // Switch Case For CURD Operations
+            // Switch Case For CRUD Operations
             switch (ch)
             {
                 case 1:
@@ -68,10 +69,49 @@ namespace LibrarySystem
                                 Console.WriteLine("enter the name again");
                                 MemberName = Console.ReadLine();
                             }
-                        Console.WriteLine("Enter Member's Contact No");
-                        MbContact = Console.ReadLine();
+                        
+                            while (true)
+                            {
+                                Console.WriteLine("Enter Member's Contact No");
+                                MbContact = Console.ReadLine();
+                                bool check = isValidMobileNumber(MbContact);
 
-                        Connection.InsertData(MemberId, MemberName, MbContact);
+
+                                if (check == true)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Length of Phone number must be 10!!!");
+                                    continue;
+                                }
+
+                            }
+
+                            public bool isValidMobileNumber(long inputMobileNumber)
+                            {
+                                string strRegex = @"(^[0-9]{10}$)|(^\+[0-9]{2}\s+[0-9] {2}[0-9]{8}$)|(^[0-9]{3}-[0-9]{4}-[0-9]{4}$)";
+
+
+                                Regex re = new Regex(strRegex);
+
+
+                                if (re.IsMatch(Convert.ToString(inputMobileNumber)))
+                                {
+                                    return (true);
+                                }
+
+                                else
+                                {
+                                    return (false);
+                                }
+
+                            }
+
+
+
+                            Connection.InsertData(MemberId, MemberName, MbContact);
                         Connection.DisplayMemberData();
                     }
 
@@ -83,14 +123,32 @@ namespace LibrarySystem
                         BookId = Console.ReadLine();
                         Console.WriteLine("Enter BookName");
                         BookTitle = Console.ReadLine();
+                            while (string.IsNullOrEmpty(BookTitle))
+                            {
+                                Console.WriteLine("You Can Not enter blank Name");
+                                Console.WriteLine("enter the name again");
+                                BookTitle = Console.ReadLine();
+                            }
                         Console.WriteLine("Enter BookPrice");
                         Price = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Enter BookAuthor");
                         Author = Console.ReadLine();
-                        Console.WriteLine("Enter Category of Book");
+                            while (string.IsNullOrEmpty(Author))
+                            {
+                                Console.WriteLine("It Can Not enter blank ");
+                                Console.WriteLine("enter the Author name again");
+                                Author = Console.ReadLine();
+                            }
+                            Console.WriteLine("Enter Category of Book");
                         Catogory = Console.ReadLine();
+                            while (string.IsNullOrEmpty(Catogory))
+                            {
+                                Console.WriteLine("It Can Not enter blank ");
+                                Console.WriteLine("enter the Book name again");
+                                Catogory = Console.ReadLine();
+                            }
 
-                        Connection.InsertData(BookId, BookTitle, Price, Author, Catogory);
+                            Connection.InsertData(BookId, BookTitle, Price, Author, Catogory);
                         Connection.DisplayBookData();
                     }
 

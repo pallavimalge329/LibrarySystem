@@ -270,13 +270,13 @@ namespace LibraryFunctions
 
         //Searching Data From BookTable
 
-        public static void SelectAsTitleCatAuthor(string data)
+        public static void SelectAsTitleCatAuthor(string BookTitle)
         {
             con.Open();
-            SqlCommand selectCommand = new SqlCommand("Select * from Book where BookTitle=@bt or Catogory=@ct or Author=@ath", con);
-            selectCommand.Parameters.Add(new SqlParameter("bt", data));
-            selectCommand.Parameters.Add(new SqlParameter("ct", data));
-            selectCommand.Parameters.Add(new SqlParameter("ath", data));
+            SqlCommand selectCommand = new SqlCommand("Select * from Book where BookTitle=@bt ", con); //or Catogory=@ct or Author=@ath
+            selectCommand.Parameters.Add(new SqlParameter("bt", BookTitle));
+            //selectCommand.Parameters.Add(new SqlParameter("ct", data));
+           // selectCommand.Parameters.Add(new SqlParameter("ath", data));
             cmd = new SqlCommand(query, con);
             dr = cmd.ExecuteReader();
             Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
