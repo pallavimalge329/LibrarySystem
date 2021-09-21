@@ -22,8 +22,9 @@ namespace LibrarySystem
             Console.WriteLine("2.Update");
             Console.WriteLine("3.Remove");
             Console.WriteLine("4.Search");
-            Console.WriteLine("5.Exit");
-            Console.Write("Enter Choice(1-5):");
+            Console.WriteLine("5.Display");
+            Console.WriteLine("6.Exit");
+            Console.Write("Enter Choice(1-6):");
             int ch = Int32.Parse(Console.ReadLine());
 
             string MemberId;
@@ -34,9 +35,9 @@ namespace LibrarySystem
             int Price;
             string Author;
             string Catogory;
-            DateTime StartDate;
-            DateTime ReturnedDate;
-            DateTime DueDate;
+         // DateTime StartDate;
+         //DateTime ReturnedDate;
+        // DateTime DueDate;
 
             // Switch Case For CRUD Operations
             switch (ch)
@@ -66,7 +67,7 @@ namespace LibrarySystem
                                 MemberName = Console.ReadLine();
                             }
 
-                            
+                    //validation for Mob No.        
                             while (true)
                             {
                                 Console.WriteLine("Enter Contact No");
@@ -85,12 +86,7 @@ namespace LibrarySystem
                                 }
 
                             }
-
-                           
-
-
-
-                            Connection.InsertData(MemberId, MemberName, MbContact);
+                        Connection.InsertData(MemberId, MemberName, MbContact);
                         Connection.DisplayMemberData();
                     }
 
@@ -150,7 +146,7 @@ namespace LibrarySystem
                     break;
                 case 2:
 
-                        //Update Opration for Member Details
+                   //Update Opration for Member Details
 
                     Console.WriteLine("1.update for Member");
                     Console.WriteLine("2.update for Book");
@@ -193,8 +189,8 @@ namespace LibrarySystem
                     break;
                 case 3:
 
-                    Console.WriteLine("1.update for Member");
-                    Console.WriteLine("2.update for Book");
+                    Console.WriteLine("1.Delete from Book");
+                    Console.WriteLine("2.Delete From Member");
                     Console.Write("Enter Choice(1-2):");
                     int choice2 = Convert.ToInt32(Console.ReadLine());
                         if (choice2 == 1)
@@ -261,15 +257,48 @@ namespace LibrarySystem
                             Connection.SelectAsTitleCatAuthor(Catogory);
                            
                             break;
-               }
 
+                        }
                     break;
 
                     case 5:
+                        Console.WriteLine("Displying Record");
+                        Console.WriteLine("----------------------------");
+                        Console.WriteLine("1.Display for Member");
+                        Console.WriteLine("2.Display for Book");
+                        Console.WriteLine("3.Display for Library Register");
+                        Console.Write("Enter Choice(1-3):");
+                        int choice3 = Convert.ToInt32(Console.ReadLine());
+
+                        if (choice3 == 1)
+                        {
+                            Console.WriteLine("Record Of Members");
+                            Connection.DisplayMember();
+                        }
+                        else if(choice3==2)
+                        {
+                            Console.WriteLine("Record Of Books");
+                            Connection.DisplayBook();
+                        }
+                        else if(choice3==3)
+                        {
+                            Console.WriteLine("Record Of Library Register");
+                            Connection.DisplayLibraryReg();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Choice");
+                        }
+                        
+                        break;
+
+
+                    case 6:
                         Console.WriteLine("Exiting From The Application");
                         Console.ReadLine();
                         Environment.Exit(0);
                             break;
+
          }
 
             Console.WriteLine("Do You Wish to continue:");

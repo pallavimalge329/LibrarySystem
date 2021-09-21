@@ -292,17 +292,69 @@ namespace LibraryFunctions
             con.Close();
         }
 
-        
+        public static void DisplayMember()
+        {
+            con.Open();
+            string query = "Select * from Member";
+            cmd = new SqlCommand(query, con);
+            dr = cmd.ExecuteReader();
+            Console.WriteLine("MemberId | MemberName | MbContact ");
+            while (dr.Read())
+            {
+                Console.WriteLine("{0} | {1} | {2} ", dr["MemberId"], dr["MemberName"], dr["MbContact"]);
 
-        
+            }
+            dr.Close();
+
+
+
+            con.Close();
+        }
+
+        public static void DisplayBook()
+        {
+            con.Open();
+            string query = "Select * from Book";
+            cmd = new SqlCommand(query, con);
+            dr = cmd.ExecuteReader();
+            Console.WriteLine("BookId | BookTitle | Price | Author | Catogory");
+            while (dr.Read())
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", dr["BookId"], dr["BookTitle"], dr["Price"], dr["Author"], dr["Catogory"]);
+
+            }
+            dr.Close();
+
+            con.Close();
+        }
+
+
+        public static void DisplayLibraryReg()
+        {
+            con.Open();
+
+            string query = "Select * from LibraryRegister";
+            cmd = new SqlCommand(query, con);
+            dr = cmd.ExecuteReader();
+            Console.WriteLine("BookId | MemberId | IssueDate | DueDate");
+            while (dr.Read())
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} ", dr["BookId"], dr["MemberId"], dr["StartDate"], dr["DueDate"]);
+
+            }
+            dr.Close();
+
+            con.Close();
+        }
+
         // executenonquery  -- insert , update, delete
         // dr= executereadder -- select
         // while(dr.Read(){
-       //}
+        //}
 
-        
 
-        }
+
+    }
 
 
     }
